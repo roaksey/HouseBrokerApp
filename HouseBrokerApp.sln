@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseBrokerApp.Domain", "Ho
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseBrokerApp.Infrastructure", "HouseBrokerApp.Infrastructure\HouseBrokerApp.Infrastructure.csproj", "{63206E1C-AB2B-43BC-89A3-854A4200C7E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseBrokerApp.Tests", "HouseBrokerApp.Tests\HouseBrokerApp.Tests.csproj", "{76F2A0B0-5567-4C8D-9DBD-40875AC7D855}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,8 +71,23 @@ Global
 		{63206E1C-AB2B-43BC-89A3-854A4200C7E8}.Release|x64.Build.0 = Release|Any CPU
 		{63206E1C-AB2B-43BC-89A3-854A4200C7E8}.Release|x86.ActiveCfg = Release|Any CPU
 		{63206E1C-AB2B-43BC-89A3-854A4200C7E8}.Release|x86.Build.0 = Release|Any CPU
+		{76F2A0B0-5567-4C8D-9DBD-40875AC7D855}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76F2A0B0-5567-4C8D-9DBD-40875AC7D855}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76F2A0B0-5567-4C8D-9DBD-40875AC7D855}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{76F2A0B0-5567-4C8D-9DBD-40875AC7D855}.Debug|x64.Build.0 = Debug|Any CPU
+		{76F2A0B0-5567-4C8D-9DBD-40875AC7D855}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{76F2A0B0-5567-4C8D-9DBD-40875AC7D855}.Debug|x86.Build.0 = Debug|Any CPU
+		{76F2A0B0-5567-4C8D-9DBD-40875AC7D855}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76F2A0B0-5567-4C8D-9DBD-40875AC7D855}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76F2A0B0-5567-4C8D-9DBD-40875AC7D855}.Release|x64.ActiveCfg = Release|Any CPU
+		{76F2A0B0-5567-4C8D-9DBD-40875AC7D855}.Release|x64.Build.0 = Release|Any CPU
+		{76F2A0B0-5567-4C8D-9DBD-40875AC7D855}.Release|x86.ActiveCfg = Release|Any CPU
+		{76F2A0B0-5567-4C8D-9DBD-40875AC7D855}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B2D842E6-BF9B-44F3-8967-4E20461E41E3}
 	EndGlobalSection
 EndGlobal
