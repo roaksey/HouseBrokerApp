@@ -1,8 +1,8 @@
 ﻿
 
 using HouseBrokerApp.Domain.Entities;
-using HouseBrokerApp.Domain.Interfaces;
 using HouseBrokerApp.Infrastructure.Data;
+using HouseBrokerApp.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace HouseBrokerApp.Infrastructure.Repositories

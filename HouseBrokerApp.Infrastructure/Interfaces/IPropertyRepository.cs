@@ -1,7 +1,7 @@
 ﻿using HouseBrokerApp.Domain.Entities;
 
 
-namespace HouseBrokerApp.Domain.Interfaces
+namespace HouseBrokerApp.Infrastructure.Interfaces
 {
     public interface IPropertyRepository
     {

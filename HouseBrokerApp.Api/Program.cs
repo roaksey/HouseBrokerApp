@@ -1,5 +1,5 @@
-﻿using HouseBrokerApp.Domain.Interfaces;
-using HouseBrokerApp.Infrastructure.Data;
+﻿using HouseBrokerApp.Infrastructure.Data;
+using HouseBrokerApp.Infrastructure.Interfaces;
 using HouseBrokerApp.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -10,25 +10,16 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// =============================
-// 1️⃣ Configure MSSQL + EF Core
-// =============================
-
+// 1️⃣ Add EF Core with SQL Server
 builder.Services.AddDbContext<HouseBrokerDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// =========================================
-// 2️⃣ Add ASP.NET Core Identity for Auth
-// =========================================
-
+// 2️⃣ Add Identity
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<HouseBrokerDbContext>()
     .AddDefaultTokenProviders();
 
-// ==================================
-// 3️⃣ Configure JWT Authentication
-// ==================================
-
+// 3️⃣ Configure JWT Auth
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -48,12 +39,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-// ==================================
-// 4️⃣ Add Authorization & CORS
-// ==================================
-
-builder.Services.AddAuthorization();
-
+// 4️⃣ Add CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
@@ -62,29 +48,18 @@ builder.Services.AddCors(options =>
                           .AllowAnyHeader());
 });
 
-// ==================================
-// 5️⃣ Register Repositories & Services
-// ==================================
-
+// 5️⃣ Add Repositories
 builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
 
-// =======================
 // 6️⃣ Add Controllers
-// =======================
-
 builder.Services.AddControllers();
 
-// ==============================
-// Swagger with JWT Support
-// ==============================
-
+// 7️⃣ Add Swagger with JWT support
 builder.Services.AddEndpointsApiExplorer();
-
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "House Broker API", Version = "v1" });
 
-    // JWT Bearer
     var jwtSecurityScheme = new OpenApiSecurityScheme
     {
         Scheme = "bearer",
@@ -92,7 +67,7 @@ builder.Services.AddSwaggerGen(c =>
         Name = "JWT Authentication",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.Http,
-        Description = "Enter JWT Bearer token only",
+        Description = "Put ONLY your JWT Bearer token here.",
         Reference = new OpenApiReference
         {
             Id = JwtBearerDefaults.AuthenticationScheme,
@@ -107,13 +82,8 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// =======================
-//  Build & Run
-// =======================
-
+// 8️⃣ Build & run
 var app = builder.Build();
-
-// Middleware Pipeline
 
 if (app.Environment.IsDevelopment())
 {
@@ -121,13 +91,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// For both HTTP and HTTPS, disable redirect for local if you want
 app.UseHttpsRedirection();
 
 app.UseCors("AllowAll");
-
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
