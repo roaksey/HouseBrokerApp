@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using HouseBrokerApp.Api.Dto;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -89,17 +90,4 @@ namespace HouseBrokerApp.Api.Controllers
         }
     }
 
-    public class RegisterDto
-    {
-        public string Username { get; set; } = default!;
-        public string Email { get; set; } = default!;
-        public string Password { get; set; } = default!;
-        public string Role { get; set; } = default!;  // "Broker" or "HouseSeeker"
-    }
-
-    public class LoginDto
-    {
-        public string Username { get; set; } = default!;
-        public string Password { get; set; } = default!;
-    }
 }

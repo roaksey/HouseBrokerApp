@@ -1,7 +1,7 @@
-﻿using HouseBrokerApp.Infrastructure.Interfaces;
-using HouseBrokerApp.Domain.Entities;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using HouseBrokerApp.Domain.Entities;
+using HouseBrokerApp.Infrastructure.Interfaces;
 
 namespace HouseBrokerApp.Api.Controllers
 {
@@ -16,6 +16,7 @@ namespace HouseBrokerApp.Api.Controllers
             _propertyRepository = propertyRepository;
         }
 
+        // 🔍 Anyone can search and view
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -31,6 +32,14 @@ namespace HouseBrokerApp.Api.Controllers
             return Ok(property);
         }
 
+        [HttpGet("search")]
+        public async Task<IActionResult> Search(string location, decimal? minPrice, decimal? maxPrice, string? propertyType)
+        {
+            var results = await _propertyRepository.SearchAsync(location, minPrice, maxPrice, propertyType);
+            return Ok(results);
+        }
+
+        // 🔐 Only Brokers can CREATE
         [Authorize(Roles = "Broker")]
         [HttpPost]
         public async Task<IActionResult> Create(Property property)
@@ -40,6 +49,7 @@ namespace HouseBrokerApp.Api.Controllers
             return CreatedAtAction(nameof(Get), new { id = created.Id }, created);
         }
 
+        // 🔐 Only Brokers can UPDATE
         [Authorize(Roles = "Broker")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(Guid id, Property property)
@@ -49,19 +59,13 @@ namespace HouseBrokerApp.Api.Controllers
             return NoContent();
         }
 
+        // 🔐 Only Brokers can DELETE
         [Authorize(Roles = "Broker")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             await _propertyRepository.DeleteAsync(id);
             return NoContent();
-        }
-
-        [HttpGet("search")]
-        public async Task<IActionResult> Search(string location, decimal? minPrice, decimal? maxPrice, string? propertyType)
-        {
-            var results = await _propertyRepository.SearchAsync(location, minPrice, maxPrice, propertyType);
-            return Ok(results);
         }
     }
 }
